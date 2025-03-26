@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Based Sentiment Analyzer</title>
+</head>
+<body>
+    <h1 style="text-align: center;">AI-Based Sentiment Analyzer</h1>
+
+    <form id="sentimentForm" style="text-align: center;">
+
+        <label for="textInput">Enter text for analysis:</label><br>
+        <textarea id="textInput" name="text" rows="4" cols="50" required></textarea><br>
+        <button type="submit" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Analyze Sentiment</button>
+
+    </form>
+    <h2 style="text-align: center;">Result:</h2>
+
+    <div id="result" style="text-align: center;"></div>
+
+
+    <script>
+        document.getElementById('sentimentForm').onsubmit = async function(event) {
+            event.preventDefault();
+            const text = document.getElementById('textInput').value;
+            const response = await fetch('/analyze', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ text })
+            });
+            const result = await response.json();
+            document.getElementById('result').innerText = `Sentiment: ${result.label}, Score: ${result.score}`;
+        };
+    </script>
+</body>
+</html>

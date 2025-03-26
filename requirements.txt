@@ -1,0 +1,5 @@
+transformers
+flask
+pymongo
+matplotlib
+torch  # Adding PyTorch as a requirement
